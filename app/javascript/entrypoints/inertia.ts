@@ -2,6 +2,8 @@ import { createInertiaApp } from '@inertiajs/react'
 import { createElement, ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 
+import Layout from '@/components/layout'
+
 // Temporary type definition, until @inertiajs/react provides one
 type ResolvedComponent = {
   default: ReactNode
@@ -12,7 +14,7 @@ createInertiaApp({
   // Set default page title
   // see https://inertia-rails.dev/guide/title-and-meta
   //
-  // title: title => title ? `${title} - App` : 'App',
+  title: title => title ? `${title} | Ratsamy Dev` : 'Ratsamy Dev',
 
   // Disable progress bar
   //
@@ -31,8 +33,8 @@ createInertiaApp({
     // To use a default layout, import the Layout component
     // and use the following line.
     // see https://inertia-rails.dev/guide/pages#default-layouts
-    //
-    // page.default.layout ||= (page) => createElement(Layout, null, page)
+    // @ts-ignore
+    page.default.layout ||= (page: ReactNode) => createElement(Layout, { user: page?.props?.user ?? false }, page)
 
     return page
   },
